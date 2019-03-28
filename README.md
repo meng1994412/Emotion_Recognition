@@ -112,6 +112,7 @@ Table 1: Learning rate schedule for experiment #1.
 
 Figure 1 shows the accuracy and loss plot of training and validation, which obtains about 63.51% validation accuracy.
 
+<img src="https://github.com/meng1994412/Emotion_Recognition/blob/master/output/vggnet_emotion_1.png" width="500">
 
 Figure 1: Accuracy and loss of training and validation for experiment #1, reaching 63.51% validation accuracy.
 
@@ -119,6 +120,8 @@ Figure 1: Accuracy and loss of training and validation for experiment #1, reachi
 As we can see from the Figure 1 (epochs 20 - 60), `SGD` leads to stagnation even when dropping the learning rate from 0.001 to 0.0001. Thus I change the optimizer to `Adam` with base learning of 0.001, leaving everything else unchanged.
 
 Figure 2 demonstrate the accuracy and loss plot of training and validation. I stop the training at 40 epochs because there is a sign showing that overfitting might occur and lower the learning rate to 0.0001 and resume the training for another 15 epochs. Now it's clear that severe overfitting occurs, though the validation accuracy is about 66.85%.
+
+<img src="https://github.com/meng1994412/Emotion_Recognition/blob/master/output/vggnet_emotion_2.png" width="500">
 
 Figure 2: Accuracy and loss of training and validation for experiment #2, which suffers from overfitting, though the validation accuracy is 66.85%.
 
@@ -133,6 +136,8 @@ Table 2: Learning rate schedule for experiment #3.
 |41 - 60 | 1e-4         |
 |61 - 75 | 1e-5         |
 
+<img src="https://github.com/meng1994412/Emotion_Recognition/blob/master/output/vggnet_emotion_3.png" width="500">
+
 Figure 3: Accuracy and loss of training and validation for experiment #3, which reaches 67.55% validation accuracy.
 
 #### Experiment 4
@@ -141,5 +146,7 @@ In the experiment #4, I make two major changes, including:
 * change `Xavier/Glorot` initialization method to `He/MSRA` initialization method, since `He/MSRA` initialization method tends to work better for the VGG family.
 
 Figure 4 shows the accuracy and loss of training and validation for experiment #4, which obtains 68.45% validation accuracy.
+
+<img src="https://github.com/meng1994412/Emotion_Recognition/blob/master/output/vggnet_emotion_4.png" width="500">
 
 Figure 4: Accuracy and loss of training and validation for experiment #4, which obtains 68.45% validation accuracy.
