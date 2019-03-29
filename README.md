@@ -150,3 +150,56 @@ Figure 4 shows the accuracy and loss of training and validation for experiment #
 <img src="https://github.com/meng1994412/Emotion_Recognition/blob/master/output/vggnet_emotion_4.png" width="500">
 
 Figure 4: Accuracy and loss of training and validation for experiment #4, which obtains 68.45% validation accuracy.
+
+#### Experiment 5
+After experiment #4, I wonder if I could make the network deeper to further boost the accuracy. Thus, I add another block of 2 * (CONV => Activation => BN) => POOL => Dropout in the network, as Table 3 shown below.
+
+| Layer Type    | Output Size   | Filter Size / Stride  |
+| ------------- |:-------------:| ---------------------:|
+| Input Image   | 48 x 48 x 1   | 3 x 3, K = 32         |
+| CONV          | 48 x 48 x 32  | 3 x 3, K = 32         |
+| CONV          | 48 x 48 x 32  | 3 x 3, K = 32         |
+| POOL          | 24 x 24 x 32  | 2 x 2                 |
+| Dropout       | 24 x 24 x 32  |                       |
+| CONV          | 24 x 24 x 64  | 3 x 3, K = 64         |
+| CONV          | 24 x 24 x 64  | 3 x 3, K = 64         |
+| POOL          | 12 x 12 x 64  | 2 x 2                 |
+| Dropout       | 12 x 12 x 64  |                       |
+| CONV          | 12 x 12 x 128 | 3 x 3, K = 128        |
+| CONV          | 12 x 12 x 128 | 3 x 3, K = 128        |
+| POOL          | 6 x 6 x 128   | 2 x 2                 |
+| Dropout       | 6 x 6 x 128   |                       |
+| CONV          | 6 x 6 x 256   | 3 x 3, K = 256        |
+| CONV          | 6 x 6 x 256   | 3 x 3, K = 256        |
+| POOL          | 3 x 3 x 128   | 2 x 2                 |
+| Dropout       | 3 x 3 x 128   |                       |
+| FC            | 64            |                       |
+| Dropout       | 64            |                       |
+| FC            | 64            |                       |
+| FC            | 6             |                       |
+| softmax       | 6             |                       |
+
+Table 3: The deeper EmotionVGGNet architecture.
+
+Since the network becomes deeper, overfitting might occur again, so I add `L2` regularization in the network of 0.0001. Other than this, everything else stays the same.
+
+The Figure 5 shows the accuracy and loss of training and validation for experiment #5, which obtains 69.71% validation accuracy. However, overfitting still occurs (epochs 50 - 70).
+
+<img src="https://github.com/meng1994412/Emotion_Recognition/blob/master/output/vggnet_emotion_5.png" width="500">
+
+Figure 5: Accuracy and loss of training and validation for experiment #6, which obatins 69.71% validation accuracy but still suffers from overfitting.
+
+#### Experiment 6
+In order to reduce the overfitting occuring in experiment #5, I decide to increase the `L2` regularization term to 0.0005 and keep everything the same.
+
+The Figure 6 shows the accuracy and loss of training and validation for experiment #6, which obtains 69.83% validation accuracy. Now, the overfitting is largely reduced (epochs 50 - 70).
+
+<img src="https://github.com/meng1994412/Emotion_Recognition/blob/master/output/vggnet_emotion_6.png" width="500">
+
+Figure 6: Accuracy and loss of training and validation for experiment #6, which obatins 69.83% validation accuracy but still suffers from overfitting.
+
+**By using the testing set to evaluate the model, the accuracy is 68.72%, as Figure 7 shown, which can claim #4 position in the Leaderboard.**
+
+<img src="https://github.com/meng1994412/Emotion_Recognition/blob/master/output/evaluation_6.png" width="200">
+
+Figure 7: Evaluation of the network by using testing set.
